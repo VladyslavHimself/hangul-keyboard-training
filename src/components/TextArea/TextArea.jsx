@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './TextArea.scss';
 
 export default function TextArea({ text }) {
-    const [visibileLines, setVisibleLines] = useState(text);
+
     return (
         <div className="text-paragraph-area">
-            <p>{visibileLines}</p>
+            <p>{ text.map((text, idx) => idx < 3 && <React.Fragment key={text}>{text}<br /></React.Fragment> )}</p>
         </div>
     );
 }

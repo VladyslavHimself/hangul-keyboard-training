@@ -1,45 +1,38 @@
 import './TypingArea.scss';
-import {useEffect, useState} from "react";
-import {disassemble, isHangul} from "hangul-js";
-export default function TypingArea({ sentence }) {
+import {useEffect, useRef, useState} from "react";
+import {disassemble} from "hangul-js";
+export default function TypingArea({ sentence, setSentence }) {
+    const inputRef = useRef(null);
     const [inputData, setInputData] = useState('');
     const [isError, setIsError] = useState(false);
-    const [disassembledSentence] = useState(disassemble(sentence).join(''));
 
-    const isInputRulesetValid =
-        inputData.length > 0
-        &&
-        !disassembledSentence.startsWith(disassemble(inputData).join(''));
+    const disassembledSentence = disassemble(sentence).join('');
 
     useEffect(() => {
-        if (isInputRulesetValid) {
+        if (inputData === sentence) {
+            setSentence(prevState => prevState.slice(1));
+            setInputData('');
+            // TODO: Check methods with CompositionEvents for hangul and replace this method
+            inputRef.current.blur();
+            inputRef.current.focus();
+
+        }
+        if (inputData.length > 0 && !disassembledSentence.startsWith(disassemble(inputData).join(''))) {
             setIsError(true);
             return;
         }
-
         setIsError(false);
-    }, [isInputRulesetValid])
+    }, [inputData, disassembledSentence, sentence, setSentence])
 
     return (
         <div className="text-type-area">
             <input
+                ref={inputRef}
+                value={inputData}
                 style={{ backgroundColor: isError ? 'yellow' : 'transparent' }}
                 onChange={({ target : { value } }) => setInputData(value)}
             />
             {isError && <div>Error!</div>}
         </div>
     );
-}
-
-function convertToStack(raw) {
-    return raw.split(' ');
-}
-
-function getLastWord(str) {
-    const words = str.split(" ");
-
-    const lastWord = words[words.length - 1];
-    const hasHangul = isHangul(lastWord);
-
-    return hasHangul ? lastWord : null;
 }
