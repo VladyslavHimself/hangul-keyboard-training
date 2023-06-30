@@ -4,6 +4,7 @@ import TypingArea from "./components/TypingArea/TypingArea";
 import {useState} from "react";
 
 import mockedData from './sentences.json';
+import KeyboardVisualizator from "./components/KeyboardVisualizator/KeyboardVisualizator";
 
 function App() {
     const [data, setData] = useState(convertStringToArray(mockedData));
@@ -12,6 +13,7 @@ function App() {
       <div className="workspace">
           <TypingArea sentence={data[0]} setSentence={setData} />
           <TextArea text={data}  />
+          <KeyboardVisualizator sentence={data[0]} />
       </div>
     </div>
   );
