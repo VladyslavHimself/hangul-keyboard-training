@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import './KeyboardKeycap.scss';
 
-export function KeyboardKeycap({ keycapData, isAlt, nextLetter}) {
+export function KeyboardKeycap({ keycapData, isAlt, nextLetter, isError}) {
     const { mainChar, size, altChar, isFingerDetector } = keycapData;
     const [isHighlighted, setIsHighlighted] = useState(false);
 
+
+    // TODO: Refactor to better solution, it consist to all component..., program...
+    const isShiftNeededValidationRule = mainChar === 'Shift' && '~!@#$%^&*()-_+{}|:"<>?ㅃㅉㄸㄲㅆㅒㅖ'.match(nextLetter)
+    const isBackspaceNeededValidationRule = mainChar === 'backspace' && isError;
+    const isSpaceValidationRule = mainChar === "Space" && nextLetter === ' '
 
     useEffect(() => {
         if (mainChar === nextLetter || altChar === nextLetter) {
@@ -19,7 +24,7 @@ export function KeyboardKeycap({ keycapData, isAlt, nextLetter}) {
         <div className="keyboard-keycap" style={{
             width: size !== 'sm' ? `${size}px` : '50px',
             textDecoration: isFingerDetector ? 'underline' : 'none',
-            backgroundColor: isHighlighted ? 'red' : 'transparent'
+            backgroundColor: ((isHighlighted  || isShiftNeededValidationRule || isSpaceValidationRule) && !isError) || isBackspaceNeededValidationRule ? '#A1A8AA' : 'transparent'
         }}>
             {isAlt && altChar ? altChar : mainChar}
         </div>

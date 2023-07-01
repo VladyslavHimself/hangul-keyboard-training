@@ -316,7 +316,7 @@ const objectTemplate = {
     ],
 }
 
-export default function KeyboardVisualizator({ nextLetter }) {
+export default function KeyboardVisualizator({ nextLetter, isError }) {
     const [isShiftPressed, setIsShiftPressed] = useState(false);
 
     useEffect(() => {
@@ -351,27 +351,27 @@ export default function KeyboardVisualizator({ nextLetter }) {
         <div className="virtual-keyboard-container">
             <div className="virtual-keyboard-row">
                 {
-                    objectTemplate.firstRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} />)
+                    objectTemplate.firstRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} isError={isError} />)
                 }
             </div>
             <div className="virtual-keyboard-row">
                 {
-                    objectTemplate.secondRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} />)
+                    objectTemplate.secondRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} isError={isError} />)
                 }
             </div>
             <div className="virtual-keyboard-row">
                 {
-                    objectTemplate.thirdRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} />)
+                    objectTemplate.thirdRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} isError={isError} />)
                 }
             </div>
             <div className="virtual-keyboard-row">
                 {
-                    objectTemplate.fourthRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} />)
+                    objectTemplate.fourthRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} isError={isError} />)
                 }
             </div>
             <div className="virtual-keyboard-row f-center">
                 {
-                    objectTemplate.fifthRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} />)
+                    objectTemplate.fifthRow.map(keycap => <KeyboardKeycap keycapData={keycap} isAlt={isShiftPressed} nextLetter={nextLetter} isError={isError} />)
                 }
             </div>
         </div>

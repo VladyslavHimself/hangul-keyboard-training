@@ -1,9 +1,9 @@
 import './TypingArea.scss';
 import {useEffect, useRef, useState} from "react";
 import {disassemble} from "hangul-js";
-export default function TypingArea({ sentence, setSentence, inputData, setInputData }) {
+export default function TypingArea({ sentence, setSentence, inputData, setInputData, isError, setIsError }) {
     const inputRef = useRef(null);
-    const [isError, setIsError] = useState(false);
+
 
     const disassembledSentence = disassemble(sentence).join('');
 

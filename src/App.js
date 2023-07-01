@@ -11,6 +11,7 @@ function App() {
     const [data, setData] = useState(convertStringToArray(mockedData));
     const [inputData, setInputData] = useState('');
     const [nextLetter, setNextLetter] = useState();
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         const disassembledSentence = disassemble(data[0]).join('');
@@ -21,9 +22,9 @@ function App() {
     return (
         <div className="App">
           <div className="workspace">
-              <TypingArea sentence={data[0]} setSentence={setData} inputData={inputData} setInputData={setInputData} />
+              <TypingArea sentence={data[0]} setSentence={setData} inputData={inputData} setInputData={setInputData} isError={isError} setIsError={setIsError} />
               <TextArea text={data}  />
-              <KeyboardVisualizator nextLetter={nextLetter} />
+              <KeyboardVisualizator nextLetter={nextLetter} isError={isError} />
           </div>
         </div>
   );
