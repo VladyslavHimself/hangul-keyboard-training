@@ -30,7 +30,7 @@ export default function TypingArea({ sentence, setSentence, inputData, setInputD
                 style={{ backgroundColor: isError ? 'yellow' : 'transparent' }}
                 onChange={({ target : { value } }) => setInputData(value)}
             />
-            {isError && <div>Error!</div>}
+            <div style={{visibility: isError ? 'visible' : 'hidden'}}>Error!</div>
         </div>
     );
 }
