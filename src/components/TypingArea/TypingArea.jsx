@@ -1,9 +1,8 @@
 import './TypingArea.scss';
 import {useEffect, useRef, useState} from "react";
 import {disassemble} from "hangul-js";
-export default function TypingArea({ sentence, setSentence }) {
+export default function TypingArea({ sentence, setSentence, inputData, setInputData }) {
     const inputRef = useRef(null);
-    const [inputData, setInputData] = useState('');
     const [isError, setIsError] = useState(false);
 
     const disassembledSentence = disassemble(sentence).join('');
@@ -15,7 +14,6 @@ export default function TypingArea({ sentence, setSentence }) {
             // TODO: Check methods with CompositionEvents for hangul and replace this method
             inputRef.current.blur();
             inputRef.current.focus();
-
         }
         if (inputData.length > 0 && !disassembledSentence.startsWith(disassemble(inputData).join(''))) {
             setIsError(true);
