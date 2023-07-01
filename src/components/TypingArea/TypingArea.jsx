@@ -1,5 +1,5 @@
 import './TypingArea.scss';
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {disassemble} from "hangul-js";
 export default function TypingArea({ sentence, setSentence, inputData, setInputData, isError, setIsError }) {
     const inputRef = useRef(null);
@@ -20,7 +20,7 @@ export default function TypingArea({ sentence, setSentence, inputData, setInputD
             return;
         }
         setIsError(false);
-    }, [inputData, disassembledSentence, sentence, setSentence])
+    }, [disassembledSentence, inputData, sentence, setInputData, setIsError, setSentence])
 
     return (
         <div className="text-type-area">

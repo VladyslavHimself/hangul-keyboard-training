@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './KeyboardVisualizator.scss';
 import {KeyboardKeycap} from "../KeyboardKeycap/KeyboardKeycap";
-import {disassemble} from "hangul-js";
 
 const objectTemplate = {
     firstRow: [
