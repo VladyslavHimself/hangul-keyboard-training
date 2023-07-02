@@ -1,6 +1,6 @@
 import './TypingArea.scss';
 import {useEffect, useRef} from "react";
-import {disassemble} from "hangul-js";
+import {assemble, disassemble} from "hangul-js";
 export default function TypingArea({ sentence, setSentence, inputData, setInputData, isError, setIsError }) {
     const inputRef = useRef(null);
 
@@ -8,7 +8,7 @@ export default function TypingArea({ sentence, setSentence, inputData, setInputD
     const disassembledSentence = disassemble(sentence).join('');
 
     useEffect(() => {
-        if (inputData === sentence) {
+        if (assemble(inputData) === sentence) {
             setSentence(prevState => prevState.slice(1));
             setInputData('');
             // TODO: Check methods with CompositionEvents for hangul and replace this method
@@ -20,7 +20,7 @@ export default function TypingArea({ sentence, setSentence, inputData, setInputD
             return;
         }
         setIsError(false);
-    }, [disassembledSentence, inputData, sentence, setInputData, setIsError, setSentence])
+    }, [disassembledSentence, inputData, sentence, setInputData, setIsError, setSentence]);
 
     return (
         <div className="text-type-area">

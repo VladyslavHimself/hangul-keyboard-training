@@ -320,8 +320,6 @@ export default function KeyboardVisualizator({ nextLetter, isError }) {
 
     useEffect(() => {
         const handleKeyDown = (event) => {
-            console.log('Key pressed:', event.key);
-
             if (event.key === 'Shift') {
                 setIsShiftPressed(true);
             }
@@ -329,8 +327,6 @@ export default function KeyboardVisualizator({ nextLetter, isError }) {
         };
 
         const handleKeyUp = (event) => {
-            console.log('Key up:', event.key);
-
             if (event.key === 'Shift') {
                 setIsShiftPressed(false);
             }
