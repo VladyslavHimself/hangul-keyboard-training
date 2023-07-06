@@ -8,7 +8,7 @@ import KeyboardVisualizator from "./components/KeyboardVisualizator/KeyboardVisu
 import {disassemble} from "hangul-js";
 
 function App() {
-    const [data, setData] = useState(convertStringToArray(mockedData));
+    const [data, setData] = useState(extractDataFromJSON(mockedData));
     const [inputData, setInputData] = useState('');
     const [nextLetter, setNextLetter] = useState();
     const [isError, setIsError] = useState(false);
@@ -31,8 +31,8 @@ function App() {
 }
 
 
-function convertStringToArray(string) {
-    return string.split(". ");
+function extractDataFromJSON(data) {
+    return data[Math.floor(Math.random() * data.length)].split(". ");
 }
 
 
