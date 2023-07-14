@@ -15,3 +15,12 @@
   display: flex;
   flex-direction: column;
 }
+
+.settings {
+  position: absolute;
+  top: 5%;
+  left: 90%;
+  transform: translate(-90%, -5%);
+
+  width: 200px;
+}
