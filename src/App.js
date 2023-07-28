@@ -22,6 +22,7 @@ function App() {
     const [inputData, setInputData] = useState('');
     const [nextLetter, setNextLetter] = useState();
     const [isError, setIsError] = useState(false);
+    const [isKeyboardVisible, setIsKeyboardVisible] = useState(true);
 
 
     useEffect(() => {
@@ -42,6 +43,11 @@ function App() {
     return (
         <div className="App">
             <div className="settings">
+                <button onClick={toggleKeyboardVisibility} className="s-keyboard-visibility-button">
+                    <span className="material-symbols-outlined">
+                        {isKeyboardVisible ? "visibility" : "visibility_off"}
+                    </span>
+                </button>
                 <Select
                     value={selectedOption}
                     onChange={setSelectedOption}
@@ -55,12 +61,18 @@ function App() {
                   <>
                       <TypingArea sentence={data[0]} setSentence={setData} inputData={inputData} setInputData={setInputData} isError={isError} setIsError={setIsError} />
                       <TextArea text={data}  />
-                      <KeyboardVisualizator nextLetter={nextLetter} isError={isError} />
+
+                      { isKeyboardVisible &&<KeyboardVisualizator nextLetter={nextLetter} isError={isError} /> }
+
                   </>
               }
           </div>
         </div>
   );
+
+    function toggleKeyboardVisibility() {
+        setIsKeyboardVisible(prevState => !prevState)
+    }
 }
 
 
