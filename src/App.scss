@@ -28,7 +28,7 @@
 
   .s-keyboard-visibility-button {
     display: flex;
-    flex-basis: 50px;
+    flex: 0 0 50px;
     height: 38px;
     align-items: center;
     justify-content: center;
@@ -37,5 +37,9 @@
 
     border: 1px solid #a7a7a7;
     border-radius: 5px;
+  }
+
+  .s-type-selection {
+    flex: 0 0 200px;
   }
 }

@@ -52,6 +52,7 @@ function App() {
                     value={selectedOption}
                     onChange={setSelectedOption}
                     options={options}
+                    className="s-type-selection"
                 />
             </div>
           <div className="workspace">
