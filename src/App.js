@@ -1,12 +1,9 @@
 import './App.scss';
-import TextArea from "./components/TextArea/TextArea";
-import TypingArea from "./components/TypingArea/TypingArea";
-import React, {useEffect, useState} from "react";
-
 import mockedData from './sentences.json';
-import KeyboardVisualizator from "./components/KeyboardVisualizator/KeyboardVisualizator";
+import React, {useEffect, useState} from "react";
 import {disassemble} from "hangul-js";
-import Select from "react-select";
+import Workspace from "./components/Workspace/Workspace";
+import Settings from "./components/Settings/Settings";
 
 const options = [
     { value: 'advanced', label: 'Advanced' },
@@ -42,32 +39,26 @@ function App() {
 
     return (
         <div className="App">
-            <div className="settings">
-                <button onClick={toggleKeyboardVisibility} className="s-keyboard-visibility-button">
-                    <span className="material-symbols-outlined">
-                        {isKeyboardVisible ? "visibility" : "visibility_off"}
-                    </span>
-                </button>
-                <Select
-                    value={selectedOption}
-                    onChange={setSelectedOption}
-                    options={options}
-                    className="s-type-selection"
+            <Settings
+                options={options}
+                isKeyboardVisible={isKeyboardVisible}
+                toggleKeyboardVisibility={toggleKeyboardVisibility}
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
+            />
+
+            {data.length &&
+                <Workspace
+                    data={data}
+                    setData={setData}
+                    inputData={inputData}
+                    setInputData={setInputData}
+                    isError={isError}
+                    setIsError={setIsError}
+                    isKeyboardVisible={isKeyboardVisible}
+                    nextLetter={nextLetter}
                 />
-            </div>
-          <div className="workspace">
-              {
-                  // TODO: Less kolhoznui method
-                  data.length &&
-                  <>
-                      <TypingArea sentence={data[0]} setSentence={setData} inputData={inputData} setInputData={setInputData} isError={isError} setIsError={setIsError} />
-                      <TextArea text={data}  />
-
-                      { isKeyboardVisible &&<KeyboardVisualizator nextLetter={nextLetter} isError={isError} /> }
-
-                  </>
-              }
-          </div>
+            }
         </div>
   );
 
