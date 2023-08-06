@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {disassemble} from "hangul-js";
 import Workspace from "./components/Workspace/Workspace";
 import Settings from "./components/Settings/Settings";
+import useSessionStorage from "./hooks/useSessionStorage";
 
 const options = [
     { value: 'advanced', label: 'Advanced' },
@@ -11,16 +12,13 @@ const options = [
     { value: 'letters', label: 'Letters' },
 ];
 
-// TODO: Add selection saving based on sessionStorage or by router params
-
 function App() {
-    const [selectedOption, setSelectedOption] = useState(options[0]);
-    const [data, setData] = useState(extractDataFromJSON(mockedData, options[0]));
+    const [selectedTypeOption, setSelectedTypeOption] = useSessionStorage('selected-typing-option', options[0])
+    const [data, setData] = useState(extractDataFromJSON(mockedData, selectedTypeOption));
     const [inputData, setInputData] = useState('');
     const [nextLetter, setNextLetter] = useState();
     const [isError, setIsError] = useState(false);
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(true);
-
 
     useEffect(() => {
         if (data.length) {
@@ -28,14 +26,14 @@ function App() {
             const _nextLetter = disassembledSentence.replace(disassemble(inputData).join(''), '').charAt(0);
             setNextLetter(_nextLetter);
         } else {
-            setData(extractDataFromJSON(mockedData, selectedOption))
+            setData(extractDataFromJSON(mockedData, selectedTypeOption))
         }
-    }, [data, inputData, selectedOption]);
+    }, [data, inputData, selectedTypeOption]);
 
     useEffect(() => {
         setInputData('');
-        setData(extractDataFromJSON(mockedData, selectedOption));
-    }, [selectedOption])
+        setData(extractDataFromJSON(mockedData, selectedTypeOption));
+    }, [selectedTypeOption])
 
     return (
         <div className="App">
@@ -43,8 +41,8 @@ function App() {
                 options={options}
                 isKeyboardVisible={isKeyboardVisible}
                 toggleKeyboardVisibility={toggleKeyboardVisibility}
-                selectedOption={selectedOption}
-                setSelectedOption={setSelectedOption}
+                selectedOption={selectedTypeOption}
+                setSelectedOption={setSelectedTypeOption}
             />
 
             {data.length &&
@@ -90,7 +88,5 @@ function extractDataFromJSON(data, selectedOption) {
 
     return data[selectedOption.value][Math.floor(Math.random() * data[selectedOption.value].length)].split(". ");
 }
-
-
 
 export default App;
