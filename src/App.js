@@ -7,8 +7,8 @@ import Settings from "./components/Settings/Settings";
 
 const options = [
     { value: 'advanced', label: 'Advanced' },
-    // { value: 'beginner', label: 'Words' }, //TODO: Add words select
-    { value: 'start', label: 'Letters' },
+    { value: 'words', label: 'Words' },
+    { value: 'letters', label: 'Letters' },
 ];
 
 // TODO: Add selection saving based on sessionStorage or by router params
@@ -71,7 +71,7 @@ function App() {
 function extractDataFromJSON(data, selectedOption) {
     if (!data) return [];
 
-    if (selectedOption.value === 'start') {
+    if (selectedOption.value === 'letters') {
         const chars = [
             'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ',
             'ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ'
@@ -79,6 +79,14 @@ function extractDataFromJSON(data, selectedOption) {
 
         return new Array(1).fill(`${chars[Math.floor(Math.random() * chars.length)]} `.repeat(40))
     }
+
+    if (selectedOption.value === 'words') {
+        return Array.from(
+            { length: data.words.length },
+            (_, i) => new Array(10).fill(data.words[i]).join(' ')
+        );
+    }
+
 
     return data[selectedOption.value][Math.floor(Math.random() * data[selectedOption.value].length)].split(". ");
 }
