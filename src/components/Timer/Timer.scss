@@ -1,0 +1,19 @@
+.timer {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+
+  font-size: 18px;
+  cursor: pointer;
+
+  transition: all .3s ease;
+
+  &:hover {
+    opacity: .3;
+  }
+
+  &:active {
+    opacity: .7;
+  }
+}

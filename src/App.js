@@ -5,6 +5,7 @@ import {disassemble} from "hangul-js";
 import Workspace from "./components/Workspace/Workspace";
 import Settings from "./components/Settings/Settings";
 import useSessionStorage from "./hooks/useSessionStorage";
+import Timer from "./components/Timer/Timer";
 
 const options = [
     { value: 'advanced', label: 'Advanced' },
@@ -37,6 +38,7 @@ function App() {
 
     return (
         <div className="App">
+            <Timer />
             <Settings
                 options={options}
                 isKeyboardVisible={isKeyboardVisible}

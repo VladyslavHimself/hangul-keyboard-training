@@ -1,6 +1,7 @@
 import Select from "react-select";
 import React from "react";
 import './Settings.scss';
+
 export default function Settings({
      toggleKeyboardVisibility,
      isKeyboardVisible,
